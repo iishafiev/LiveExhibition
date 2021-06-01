@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title th:text = "${title}"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<header class="py-3 mb-4 border-bottom">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+    <a href="/" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">
+      Live Exhibition
+    </a>
+
+    <div class="col-md-auto text-end">
+      <div sec:authorize ="!isAuthenticated()">
+        <a class="btn btn-outline-primary me-2" href="/login" role="button">Вход</a>
+      </div>
+      <div sec:authorize ="isAuthenticated()">
+        <a class="btn btn-outline-primary me-2 mx-2" href="/personalAccount" role="button">Личный кабинет</a>
+        <a class="btn btn-outline-primary me-2 mx-2" href="/logout" role="button">Выйти</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container py-5">
+    <div class="d-flex flex-column p-3 my-3 alert">
+      <h1>Информация о выставке</h1>
+      <hr>
+      <br>
+      <h3>Название:</h3>
+      <p th:text = "${exhibition.Name}"/>
+
+      <h3>Организатор:</h3>
+      <p th:text = "${exhibition.Organizer.FullName}"/>
+
+      <h3>Короткое описание:</h3>
+      <p th:text = "${exhibition.ShortDescription}"/>
+
+      <h3>Полное описание:</h3>
+      <p th:text = "${exhibition.Description}"/>
+
+      <h3>Даты проведения:</h3>
+      <p th:text = "${#dates.format(exhibition.BeginningDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(exhibition.EndDate, 'dd-MM-yyyy')}"/>
+
+      <h3>Тег выставки:</h3>
+      <p th:text = "${exhibition.tag}"/>
+
+      <h2>Участники выставки:</h2>
+      <div th:each = "app : ${apps}" class="flex-column p-3 my-3 bg-light alert border border-info ">
+        <h5>Компания экспонента:</h5>
+        <p th:text = "${app.exhibitor.Company}"/>
+        <h5>Имя экспонента:</h5>
+        <p th:text = "${app.exhibitor.FullName}"/>
+        <h5>Описание экспонента:</h5>
+        <p th:text = "${app.exhibitor.Description}"/>
+        <a th:href="'/exhibitorInfo/' + ${app.exhibitor.id}"> Подробнее об экспоненте</a>
+    </div>
+</main>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

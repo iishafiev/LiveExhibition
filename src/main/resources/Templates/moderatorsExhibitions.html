@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/moderatorsPASidebar :: moderatorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Заявки на организацию выставок</h1>
+        <hr>
+
+        <div th:each = "exhibition : ${exhibitions}" class="flex-column p-3 my-3 bg-light alert">
+          <h3 th:text = "${exhibition.Name}"/>
+          <h5 th:text = "${exhibition.Organizer.FullName}"/>
+          <hr>
+          <p th:text = "${exhibition.tag}"/>
+          <p th:text = "${exhibition.ShortDescription}"/>
+          <a th:href="'/exhibitionInfo/' + ${exhibition.id}"> Подробнее</a>
+          <p th:text = "${#dates.format(exhibition.BeginningDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(exhibition.EndDate, 'dd-MM-yyyy')}"/>
+          <p th:text="${exhibition.isApplication()} ? 'Заявка на рассмотрении' : 'Заявка принята'" />
+          <hr>
+          <a class="btn btn-success btn-lg" th:href="@{'/moderatorOrganizersApplicationsAccept/' + ${exhibition.id}}" th:if="${exhibition.isApplication()}">
+            Принять заявку
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

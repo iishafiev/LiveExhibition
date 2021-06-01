@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/organizersPASidebar :: organizersPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <h1 class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">Ваши выставки</h1>
+          <div class="col-md-auto text-end">
+            <a href="/organizersExhibitionAdd" class="btn btn-primary my-auto">
+              Подать заявку
+            </a>
+          </div>
+        </div>
+
+        <hr>
+
+        <div th:each = "exhibition : ${exhibitions}" class="d-flex flex-column p-3 my-3 bg-light alert">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+            <h3 th:text = "${exhibition.Name}" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong"/>
+            <div class="col-md-auto text-end">
+              <a th:href="@{'/organizersExhibitionsEdit/' + ${exhibition.id}}"   class="btn btn-primary my-auto">
+                Изменить
+              </a>
+            </div>
+          </div>
+
+          <h5 th:text = "${exhibition.Organizer.FullName}" class="pt-3"/>
+          <p th:text = "${exhibition.tag}"/>
+          <p th:text = "${exhibition.ShortDescription}"/>
+          <a th:href="'/exhibitionInfo/' + ${exhibition.id}"> Подробнее</a>
+          <p th:text = "${#dates.format(exhibition.BeginningDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(exhibition.EndDate, 'dd-MM-yyyy')}"/>
+          <p th:text="${exhibition.isApplication()} ? 'Заявка на рассмотрении' : 'Заявка принята'" />
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

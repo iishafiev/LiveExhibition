@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/exhibitorsPASidebar :: exhibitorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Выставки, в которых вы участвуете</h1>
+        <hr>
+
+        <div th:each = "app : ${exhibitorsApplications}" class="d-flex flex-column p-3 my-3 bg-light alert">
+          <h3 th:text = "${app.exhibition.Name}"/>
+          <h5 th:text = "${app.exhibition.Organizer.FullName}"/>
+          <hr>
+          <p th:text = "${app.exhibition.tag}"/>
+          <p th:text = "${app.exhibition.ShortDescription}"/>
+          <a th:href="'/exhibitionInfo/' + ${app.exhibition.id}"> Подробнее о выставке</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

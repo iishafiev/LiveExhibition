@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/moderatorsPASidebar :: moderatorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Заявки на выставки</h1>
+        <hr>
+
+        <div th:each = "app : ${exhibitorsApplications}" class="d-flex flex-column p-3 my-3 bg-light alert">
+          <h3 th:text = "${app.Exhibition.Name}"/>
+          <h5 th:text = "${app.Exhibition.Organizer.FullName}"/>
+          <h3 th:text = "${app.Exhibitor.Company}"/>
+          <h5 th:text = "${app.Exhibitor.FullName}"/>
+          <hr>
+          <p th:text="${app.Accepted()} ? 'Заявка принята' : 'Заявка на рассмотрении'"/>
+          <p th:text = "${app.Exhibition.ShortDescription}"/>
+          <a th:href="'/exhibitorInfo/' + ${app.Exhibitor.id}"> Подробнее об участнике</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

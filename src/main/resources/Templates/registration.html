@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Регистрация</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+  <div th:insert="Blocks/header2 :: header2"></div>
+
+  <div class="container">
+    <main>
+      <div>
+        <h4 class="mb-3">Регистрация</h4>
+        <form class="needs-validation" method="POST" modelAttribute="userForm">
+          <div class="row g-3">
+
+            <div class="col-12">
+              <label for="fullName" class="form-label">ФИО полностью</label>
+              <input type="text" path = "FullName" class="form-control" name="FullName" id="fullName" placeholder="Фамилия Имя Отчество" value="" required="">
+            </div>
+
+            <div class="col-12">
+              <label for="company" class="form-label">Компания</label>
+              <input type="text" path = "Company" class="form-control" name="Company" id="company" placeholder="ООО Компания" required="">
+
+            </div>
+
+            <div class="col-12">
+              <label for="username" class="form-label">Email</label>
+              <input type="email" path = "username" class="form-control" name="username" id="username" placeholder="mail@example.com" value="" required="" autofocus="true">
+              <br>
+              <p th:text = "${usernameError}" class="alert-danger" role="alert"/>
+
+            </div>
+
+            <div class="col-12">
+              <label for="password" class="form-label">Пароль</label>
+              <input type="password" class="form-control" path="password" name="password" id="password" placeholder="Введите пароль" value="" required="">
+
+            </div>
+
+            <div class="col-12">
+              <label for="passwordConfirm" class="form-label">Пароль</label>
+              <input type="password" class="form-control" path="passwordConfirm" name="passwordConfirm" id="passwordConfirm" placeholder="Подтвердите пароль" value="" required="">
+              <br>
+              <p th:text = "${passwordError}" class="alert-danger" role="alert"/>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <h4 class="mb-3">Тип аккаунта</h4>
+
+          <div class="my-3">
+            <div class="form-check" >
+              <input id="organizer" path="UserType" name="userType" type="radio" class="form-check-input" value="1" checked="" required="">
+              <label class="form-check-label" for="organizer">Организатор</label>
+            </div>
+            <div class="form-check">
+              <input id="exhibitor" path="UserType" name="userType" type="radio" class="form-check-input" value="2" required="">
+              <label class="form-check-label" for="exhibitor">Экспонент</label>
+            </div>
+            <div class="form-check">
+              <input id="visitor" path="UserType" name="userType" type="radio" class="form-check-input" value="3" required="">
+              <label class="form-check-label" for="visitor">Посетитель</label>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-80 btn btn-primary btn-lg text-center" type="submit">Зарегистрироваться</button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

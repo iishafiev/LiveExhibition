@@ -1,0 +1,37 @@
+<dev th:fragment="exhibitorsPASidebar">
+  <div class="d-flex flex-column p-3 bg-light" >
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="/exhibitorsPersonalAccount" class="nav-link" th:classappend="${#strings.contains({#execInfo.processedTemplateName},'exhibitorsPersonalAccount')} ? 'active' : 'link-dark'">
+          Профиль
+        </a>
+      </li>
+      <li>
+        <a href="/exhibitorsGoods" class="nav-link" th:classappend="${#strings.contains({#execInfo.processedTemplateName},'exhibitorsGoods')} ? 'active' : 'link-dark'">
+          Ваши товары
+        </a>
+      </li>
+      <li>
+        <a href="/exhibitorsExhibitions" class="nav-link" th:classappend="${#strings.contains({#execInfo.processedTemplateName},'exhibitorsExhibitions')} ? 'active' : 'link-dark'">
+          Ваши выставки
+        </a>
+      </li>
+      <li>
+        <a href="/exhibitorsApplications" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'exhibitorsApplications' ? 'active' : 'link-dark'">
+          Ваши заявки
+        </a>
+      </li>
+      <li>
+        <a href="/exhibitorsApplicationsAdd" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'exhibitorsApplicationsAdd' ? 'active' : 'link-dark'">
+          Подать заявку на участие в выставке
+        </a>
+      </li>
+      <li>
+        <a href="/logout" class="nav-link">
+          Выйти
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+</dev>

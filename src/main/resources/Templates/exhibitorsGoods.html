@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/exhibitorsPASidebar :: exhibitorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+          <h2 class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">Ваши товары</h2>
+          <div class="col-md-auto text-end">
+            <a href="/exhibitorsGoodsAdd" class="btn btn-primary my-auto">
+              Добавить товар
+            </a>
+          </div>
+        </div>
+        <hr>
+
+        <div th:each = "product : ${goods}" class="p-3 my-3 border rounded position-relative row">
+          <div class="col d-flex flex-column position-static">
+            <h3 th:text = "${product.Name}"/>
+            <hr>
+            <p th:text = "${product.Description}"/>
+          </div>
+          <div class="col-auto d-none d-lg-block">
+            <img th:src="${product.Photo}" width="250" height="250">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

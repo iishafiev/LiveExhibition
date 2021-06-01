@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title th:text = "${title}"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<header class="py-3 mb-4 border-bottom">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+    <a href="/" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">
+      Live Exhibition
+    </a>
+
+    <div class="col-md-auto text-end">
+      <div sec:authorize ="!isAuthenticated()">
+        <a class="btn btn-outline-primary me-2" href="/login" role="button">Вход</a>
+      </div>
+      <div sec:authorize ="isAuthenticated()">
+        <a class="btn btn-outline-primary me-2 mx-2" href="/personalAccount" role="button">Личный кабинет</a>
+        <a class="btn btn-outline-primary me-2 mx-2" href="/logout" role="button">Выйти</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container py-5">
+    <div class="d-flex flex-column p-3 my-3 alert">
+      <h1>Информация об экспоненте</h1>
+      <hr>
+      <br>
+      <h3>Полное имя:</h3>
+      <p th:text = "${exhibitor.FullName}"/>
+
+      <h3>Компания:</h3>
+      <p th:text = "${exhibitor.Company}"/>
+
+      <h3>Email:</h3>
+      <p th:text = "${exhibitor.Email}"/>
+
+      <h3>Описание:</h3>
+      <p th:text = "${exhibitor.Description}"/>
+
+      <h2>Товары экспонента:</h2>
+      <div th:each = "product : ${exhibitor.Goods}" class="p-2 m-2 border border-info rounded position-relative row">
+        <div class="col d-flex flex-column position-static">
+          <h4>Название товара:</h4>
+          <p th:text = "${product.Name}"/>
+          <hr>
+          <h5>Описание товара:</h5>
+          <p th:text = "${product.Description}"/>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img th:src="${product.Photo}" width="250" height="250">
+        </div>
+      </div>
+    </div>
+</main>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

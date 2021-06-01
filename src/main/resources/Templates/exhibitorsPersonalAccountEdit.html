@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/exhibitorsPASidebar :: exhibitorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Изменение данных пользователя</h1>
+
+
+        <div class="d-flex flex-column p-3 my-3 alert">
+
+          <form class="needs-validation" method="POST" modelAttribute="exhChangeForm">
+            <label for="FullName" class="form-label">Полное имя</label>
+            <input type="text" name="FullName" id="FullName" th:placeholder="${exhibitor.FullName}" th:value = "${exhibitor.FullName}" class="form-control" value="" required=""><br>
+
+            <label for="Company" class="form-label">Компания</label>
+            <input type="text" name="Company" id="Company" th:placeholder="${exhibitor.Company}" th:value = "${exhibitor.Company}" class="form-control" value="" required=""><br>
+
+            <p>Email:</p>
+            <p th:text = "${exhibitor.Email}" name = "Email"/>
+
+            <label for="Description" class="form-label">Описание:</label>
+            <textarea name="Description" id="Description" placeholder="Введите информацию о себе" class="form-control" th:value = "${exhibitor.Description}" required=""></textarea><br>
+
+            <hr>
+            <button type="submit" class="btn btn-success">Изменить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

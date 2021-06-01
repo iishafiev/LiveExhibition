@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title th:text = "${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+    <header class="py-3 mb-4 border-bottom">
+        <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+            <a href="/" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">
+                Live Exhibition
+            </a>
+
+            <div class="col-md-auto text-end">
+                <div sec:authorize ="!isAuthenticated()">
+                    <a class="btn btn-outline-primary me-2" href="/login" role="button">Вход</a>
+                </div>
+                <div sec:authorize ="isAuthenticated()">
+                    <a class="btn btn-outline-primary me-2 mx-2" href="/personalAccount" role="button">Личный кабинет</a>
+                    <a class="btn btn-outline-primary me-2 mx-2" href="/logout" role="button">Выйти</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container py-5">
+            <h2 class="pb-2 border-bottom">О платформе</h2>
+            <p class="lead">Live Exhibition - онлайн платформа для организации и проведения виртуальных выставок. <p>
+            <p class="lead">Зарегестритуйтесь как организатор, участник выставки или посетитель, чтобы создавать свои выставки, участвовать в уже организованных и просматривать интересующие Вас мероприятия. Продвигайте свой бренд, товары и услуги, а также знакомьтесь и сотрудничайте с другими экспонентами.</p>
+            <div class="row g-5 py-5">
+                <div class="col-md-4 d-flex align-items-start">
+                    <div>
+                        <h2>Организаторам</h2>
+                        <p>Создавайте и модерируйте свои тематические выставки и набирайте интересующих Вас экспонентов, привелкайте новых участников выставок</p>
+                        <a href="/registration" class="btn btn-primary my-auto">
+                            Регистрация
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-start">
+                    <div>
+                        <h2>Экспонентам</h2>
+                        <p>Подавайте заявки на участие в выставках, размещайте предложения своих товаров и сервисов, информацию о своей компании и контакты для связи</p>
+                        <a href="/registration" class="btn btn-primary my-auto">
+                            Регистрация
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-start">
+                    <div>
+                        <h2>Посетителям</h2>
+                        <p>Просматривайте проходящие и запланированные выставки, предлагаемые товары и услуги, связывайтесь с организаторами и участниками</p>
+                        <a href="/registration" class="btn btn-primary my-auto">
+                            Регистрация
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

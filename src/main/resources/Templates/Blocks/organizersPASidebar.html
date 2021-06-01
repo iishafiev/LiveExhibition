@@ -1,0 +1,32 @@
+<dev th:fragment="organizersPASidebar">
+  <div class="d-flex flex-column p-3 bg-light" >
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="/organizersPersonalAccount" class="nav-link" th:classappend="${#strings.contains({#execInfo.processedTemplateName},'organizersPersonalAccount')} ? 'active' : 'link-dark'">
+          Профиль
+        </a>
+      </li>
+      <li>
+        <a href="/organizersExhibitions" class="nav-link" th:classappend="${#strings.contains({#execInfo.processedTemplateName}, 'organizersExhibitions')} ? 'active' : 'link-dark'">
+          Ваши выставки
+        </a>
+      </li>
+      <li>
+        <a href="/organizersExhibitionAdd" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'organizersExhibitionAdd' ? 'active' : 'link-dark'">
+          Подать заявку на организацию выставки
+        </a>
+      </li>
+      <li>
+        <a href="/organizersApplications" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'organizersApplications' ? 'active' : 'link-dark'">
+          Заявки участников
+        </a>
+      </li>
+      <li>
+        <a href="/logout" class="nav-link">
+          Выйти
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+</dev>

@@ -1,0 +1,15 @@
+<div th:fragment="header2" >
+  <header class="py-3 mb-4 border-bottom">
+    <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+      <a href="/" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">
+        Live Exhibition
+      </a>
+
+      <div class="col-md-auto text-end">
+        <sec:authorize access="!isAuthenticated()">
+          <a class="btn btn-outline-primary me-2" href="/login" role="button">Вход</a>
+        </sec:authorize>
+      </div>
+    </div>
+  </header>
+</div>

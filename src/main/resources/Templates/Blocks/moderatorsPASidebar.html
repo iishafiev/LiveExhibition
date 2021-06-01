@@ -1,0 +1,27 @@
+<dev th:fragment="moderatorsPASidebar">
+    <div class="d-flex flex-column p-3 bg-light" >
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a href="/moderatorsPersonalAccount" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'moderatorsPersonalAccount' ? 'active' : 'link-dark'">
+                    Профиль
+                </a>
+            </li>
+            <li>
+                <a href="/moderatorsExhibitions" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'moderatorsExhibitions' ? 'active' : 'link-dark'">
+                    Заявки организаторов
+                </a>
+            </li>
+            <li>
+                <a href="/moderatorsExhibitorsApplications" class="nav-link" th:classappend="${#execInfo.processedTemplateName} == 'moderatorsExhibitorsApplications' ? 'active' : 'link-dark'">
+                    Заявки участников
+                </a>
+            </li>
+            <li>
+                <a href="/logout" class="nav-link">
+                    Выйти
+                </a>
+            </li>
+        </ul>
+        <hr>
+    </div>
+</dev>

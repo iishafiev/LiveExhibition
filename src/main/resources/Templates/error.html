@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <title>Вход</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+
+</head>
+<body>
+
+<div th:insert="Blocks/header2 :: header2"></div>
+
+<div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div class="row align-items-center g-5 py-5">
+
+    <div class="col-10 mx-auto col-lg-5">
+      <div  class="p-5 border rounded-3 bg-light">
+        <h1 class="h1 mb-3 fw-normal text-center">Live Exhibition</h1>
+        <br>
+        <div class="mb-3">
+          <h3 th:text="${errorDesc}" class="text-center"></h3>
+          <br>
+          <h5 th:text="${errorNote}" class="text-center">Непредвиденная ошибка</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Вход</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+
+</head>
+<body>
+
+    <div th:insert="Blocks/header2 :: header2"></div>
+
+    <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+        <div class="row align-items-center g-5 py-5">
+
+            <div class="col-10 mx-auto col-lg-5">
+                <form class="p-5 border rounded-3 bg-light" method="POST" action="/login">
+                    <h1 class="h2 mb-3 fw-normal text-center">Live Exhibition</h1>
+                    <br>
+                    <div class="form-floating mb-3">
+                        <input type="email" name="username" class="form-control" id="floatingInput" placeholder="Адрес электронной почты" autofocus="true">
+                        <br>
+                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Пароль">
+                    </div>
+                    <div th:if="${param.error != null}" style="color: red;">Неверный логин или пароль<br></div>
+                    <br>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

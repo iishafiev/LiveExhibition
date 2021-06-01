@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/exhibitorsPASidebar :: exhibitorsPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Новая завяка на участие в выставке</h1>
+        <hr>
+
+        <form class="needs-validation" method="POST" modelAttribute="applicationForm">
+          <label for="Exhibition" class="form-label">Название выставки</label>
+          <select class="form-control" name="Exhibition" id="Exhibition" title="Выберите выставку">
+            <option th:each="exhibition : ${exhibitions}"
+                    th:value="${exhibition.id}"
+                    th:text="${exhibition.Name}">Выставка
+            </option>
+          </select>
+          <br>
+          <label for="Description" class="form-label">Описание заявки</label>
+          <textarea name="Description" id="Description" placeholder="Введите описание заявки" class="form-control" value="" required=""></textarea><br>
+
+          <hr>
+          <button type="submit" class="btn btn-success">Подать заявку</button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Личный кабинет</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+    <main>
+        <div class="row">
+            <div class="col-3">
+                <div th:insert="Blocks/organizersPASidebar :: organizersPASidebar"></div>
+            </div>
+
+            <div class="col-9">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+                    <h1 class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">Личный кабинет</h1>
+                    <div class="col-md-auto text-end">
+                        <a th:href="@{'/organizersPersonalAccountEdit/' + ${organizer.id}}">Изменить данные </a>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column p-3 my-3 alert">
+                    <h3>Полное имя:</h3>
+                    <p th:text = "${organizer.FullName}"/>
+
+                    <h3>Компания:</h3>
+                    <p th:text = "${organizer.Company}"/>
+
+                    <h3>Email:</h3>
+                    <p th:text = "${organizer.Email}"/>
+
+                    <h3>Ваши выставки:</h3>
+                    <div th:each = "exhibition : ${organizer.Exhibitions}">
+                        <a th:href = "'/exhibitionInfo/' + ${exhibition.id}" th:text = "${exhibition.Name}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

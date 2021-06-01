@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title> Личный кабинет</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<div th:insert="Blocks/header1 :: header1"></div>
+
+<div class="container">
+  <main>
+    <div class="row">
+      <div class="col-3">
+        <div th:insert="Blocks/organizersPASidebar :: organizersPASidebar"></div>
+      </div>
+
+      <div class="col-9">
+        <h1>Изменение выставки</h1>
+
+
+        <hr>
+
+        <form class="needs-validation" method="POST" modelAttribute="exhibitionChangeForm">
+          <label for="Name" class="form-label">Название выставки</label>
+          <input type="text" name="Name" id="Name" th:placeholder="${exhibition.Name}" th:value="${exhibition.Name}" class="form-control" required=""><br>
+
+          <label for="ShortDescription" class="form-label">Краткое описание выставки</label>
+          <input type="text" name="ShortDescription" id="ShortDescription" th:placeholder="${exhibition.ShortDescription}" th:value ="${exhibition.ShortDescription}" class="form-control" required=""><br>
+
+          <label for="Description" class="form-label">Полное описание выставки</label>
+          <textarea name="Description" id="Description" th:placeholder="${exhibition.Description}" th:field = "${exhibition.Description}" class="form-control" required=""> </textarea><br>
+
+          <label for="TagName" class="form-label">Тег выставки</label>
+          <input type="text" name="TagName" id="TagName" th:placeholder="${exhibition.tag}" th:value ="${exhibition.tag}" class="form-control" required=""><br>
+
+          <p>Дата начала выставки</p>
+          <p name="BeginningDateS"  th:text = "${#dates.format(exhibition.BeginningDate, 'dd-MM-yyyy')}"/>
+
+          <p>Дата окончания выставки</p>
+          <p name="EndDateS" th:text = "${#dates.format(exhibition.EndDate, 'dd-MM-yyyy')}"/>
+
+          <p th:text="${exhibition.isApplication()} ? 'Заявка на рассмотрении' : 'Заявка принята'" />
+
+          <button type="submit" class="btn btn-success">Изменить</button>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>

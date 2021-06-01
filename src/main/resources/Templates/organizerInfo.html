@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title th:text = "${title}"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+</head>
+<body>
+<header class="py-3 mb-4 border-bottom">
+  <div class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
+    <a href="/" class="d-flex align-items-center col-md-auto mb-2 mb-md-0 text-dark strong">
+      Live Exhibition
+    </a>
+
+    <div class="col-md-auto text-end">
+      <div sec:authorize ="!isAuthenticated()">
+        <a class="btn btn-outline-primary me-2" href="/login" role="button">Вход</a>
+      </div>
+      <div sec:authorize ="isAuthenticated()">
+        <a class="btn btn-outline-primary me-2 mx-2" href="/personalAccount" role="button">Личный кабинет</a>
+        <a class="btn btn-outline-primary me-2 mx-2" href="/logout" role="button">Выйти</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container py-5">
+    <div class="d-flex flex-column p-3 my-3 ">
+      <h1>Информация об организаторе</h1>
+      <br>
+      <h3>Полное имя:</h3>
+      <p th:text = "${organizer.FullName}"/>
+
+      <h3>Компания:</h3>
+      <p th:text = "${organizer.Company}"/>
+
+      <h3>Email:</h3>
+      <p th:text = "${organizer.Email}"/>
+
+      <h2>Выставки организатора:</h2>
+      <div th:each = "exhibition : ${organizer.Exhibitions}"  class="border border-info p-2 m-2">
+        <h5>Название выставки:</h5>
+        <p th:text = "${exhibition.Name}"/>
+        <h5>Краткое описание выставки:</h5>
+        <p th:text = "${exhibition.ShortDescription}"/>
+
+        <p th:text = "${#dates.format(exhibition.BeginningDate, 'dd-MM-yyyy')} + ' - ' + ${#dates.format(exhibition.EndDate, 'dd-MM-yyyy')}"/>
+        <a th:href="'/exhibitionInfo/' + ${exhibition.id}"> Подробнее</a>
+
+      </div>
+    </div>
+</main>
+
+<div th:insert="Blocks/footer :: footer"></div>
+</body>
+</html>
