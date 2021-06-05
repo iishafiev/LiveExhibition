@@ -38,11 +38,19 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
 
-        if (user == null) {
+        if (!user.isPresent()) {
             throw new UsernameNotFoundException("User not found");
         }
 
         return user.get();
+    }
+
+    public Optional<User> getVisitorByUsernameAndPassword(String username, String password)
+    {
+        Optional<User> user = userRepository.findVisitorByUsername(username);
+        if (user.isPresent() & bCryptPasswordEncoder.matches(password, user.get().getPassword()))
+            return user;
+        else return null;
     }
 
     public List<User> allUsers() {

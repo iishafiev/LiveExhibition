@@ -17,7 +17,13 @@ public interface ExhibitionsRepository extends CrudRepository<Exhibitions, Long>
     @Query(value = "SELECT ee.* FROM exhibitions ee WHERE ee.is_application = 0",
             nativeQuery = true)
     List<Exhibitions> findAllAccepted();
-    @Query(value = "SELECT  e.id, e.name, e.short_description, e.description, e.beginning_date, e.end_date FROM exhibitions e WHERE e.is_application = 0",
+    @Query(value = "SELECT ee.* FROM exhibitions ee WHERE ee.is_application = 0 and CURRENT_DATE() > ee.beginning_date and CURRENT_DATE() < ee.end_date",
             nativeQuery = true)
-    List<Object> findAllExhibitionsInfo();
+    List<Exhibitions> findAllExhibitionsInfo();
+    @Query(value = "SELECT ee.* FROM exhibitions ee JOIN exhibition_tag t ON ee.tag_name = t.id WHERE ee.is_application = 0 and CURRENT_DATE() > ee.beginning_date and CURRENT_DATE() < ee.end_date and t.name = ?1",
+            nativeQuery = true)
+    List<Exhibitions> findExhibitionsByTag(String tag);
+    @Query(value = "SELECT ee.* FROM exhibitions ee WHERE ee.is_application = 0 and CURRENT_DATE() > ee.beginning_date and CURRENT_DATE() < ee.end_date and ee.name LIKE %?1%",
+            nativeQuery = true)
+    List<Exhibitions> findExhibitionsByName(String name);
 }

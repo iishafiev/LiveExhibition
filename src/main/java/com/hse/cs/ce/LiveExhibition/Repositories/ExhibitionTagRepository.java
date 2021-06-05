@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface ExhibitionTagRepository extends CrudRepository<ExhibitionTag, Long> {
-    @Query(value = "SELECT tag.* FROM ExhibitionTag tag WHERE tag.Name = ?1 ",
+    @Query(value = "SELECT tag.* FROM Exhibition_Tag tag WHERE tag.Name = ?1 ",
             nativeQuery = true)
     Optional<ExhibitionTag> findByName(String Name);
 }
